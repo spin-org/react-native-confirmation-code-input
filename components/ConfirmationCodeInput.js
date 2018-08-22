@@ -21,6 +21,7 @@ export default class ConfirmationCodeInput extends Component {
     autoFocus: PropTypes.bool,
     codeInputStyle: TextInput.propTypes.style,
     containerStyle: viewPropTypes.style,
+    onCodeChange: PropTypes.func,
     onFulfill: PropTypes.func,
   };
 
@@ -61,11 +62,13 @@ export default class ConfirmationCodeInput extends Component {
   }
 
   clear() {
+    codeArr = new Array(this.props.codeLength).fill('');
     this.setState({
-      codeArr: new Array(this.props.codeLength).fill(''),
+      codeArr,
       currentIndex: 0
     });
     this._setFocus(0);
+    this.onCodeChange(codeArr);
   }
 
   _setFocus(index) {
@@ -91,7 +94,8 @@ export default class ConfirmationCodeInput extends Component {
     this.setState({
       codeArr: newCodeArr,
       currentIndex: index
-    })
+    });
+    this.onCodeChange(newCodeArr);
   }
 
   _isMatchingCode(code, compareWithCode, ignoreCase = false) {
@@ -233,6 +237,7 @@ export default class ConfirmationCodeInput extends Component {
         currentIndex: prevState.currentIndex + 1
       };
     });
+    this.onCodeChange(newCodeArr);
   }
 
   render() {
