@@ -68,7 +68,7 @@ export default class ConfirmationCodeInput extends Component {
       currentIndex: 0
     });
     this._setFocus(0);
-    this.onCodeChange(codeArr);
+    this.props.onCodeChange(codeArr);
   }
 
   _setFocus(index) {
@@ -95,7 +95,7 @@ export default class ConfirmationCodeInput extends Component {
       codeArr: newCodeArr,
       currentIndex: index
     });
-    this.onCodeChange(newCodeArr);
+    this.props.onCodeChange(newCodeArr);
   }
 
   _isMatchingCode(code, compareWithCode, ignoreCase = false) {
@@ -237,7 +237,7 @@ export default class ConfirmationCodeInput extends Component {
         currentIndex: prevState.currentIndex + 1
       };
     });
-    this.onCodeChange(newCodeArr);
+    this.props.onCodeChange(newCodeArr);
   }
 
   render() {
